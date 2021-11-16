@@ -7,13 +7,16 @@ data "aws_ami" "ami" {
   }
 }
 
-
+module "security_group" {
+  source = "./modules/security_group"
+}
 
 resource "aws_instance" "instance" {
-  count         = var.count_instance
-  ami           = data.aws_ami.ami.id
-  instance_type = var.instance_type
-  key_name      = var.key_name
+  count                  = var.count_instance
+  ami                    = data.aws_ami.ami.id
+  instance_type          = var.instance_type
+  key_name               = var.key_name
+  vpc_security_group_ids = module.security_group.security_group_id
   tags = {
     Name = "instance"
   }
