@@ -15,15 +15,21 @@ module "vpc" {
   subnet_name = "subnet1"
 }
 
+module "security_group" {
+  source    = "./modules/security_group"
+  sg_vpc_id = module.vpc.vpc_id
+  sg_name   = "my-security-group"
+}
+
 module "ec2" {
-  source         = "./modules/ec2"
-  instance_name  = "instance1"
-  key_name       = aws_key_pair.key_pair.key_name
-  ami_owners     = ["099720109477"]
-  ami_values     = "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
-  count_instance = 1
-  instance_type  = "t2.micro"
-  vpc_id         = module.vpc.vpc_id
-  subnet_id      = module.vpc.subnet_id
-  private_ip     = null
+  source                = "./modules/ec2"
+  instance_name         = "instance1"
+  key_name              = aws_key_pair.key_pair.key_name
+  ami_owners            = ["099720109477"]
+  ami_values            = "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
+  count_instance        = 1
+  instance_type         = "t2.micro"
+  subnet_id             = module.vpc.subnet_id
+  ec2_security_group_id = module.security_group.security_group_id
+  private_ip            = null
 }
