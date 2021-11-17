@@ -10,7 +10,9 @@ resource "aws_key_pair" "key_pair" {
 module "vpc" {
   source      = "./modules/vpc"
   vpc_cidr    = "172.14.0.0/16"
+  vpc_name    = "vpc1"
   subnet_cidr = "172.14.10.0/24"
+  subnet_name = "subnet1"
 }
 
 module "ec2" {
