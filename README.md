@@ -19,6 +19,10 @@ cd scripts
 ```
 ./generate-keypair.sh
 ```
+4. Go to root folder
+```
+cd ..
+```
 ### **Provision EC2 with Dynamic IP**
 1. Go to root folder then preview changes with command below
 ```
