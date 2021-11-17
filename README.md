@@ -38,6 +38,10 @@ terraform plan
 terraform apply -input=false -auto-approve
 ```
 3. Check in your AWS Console GUI, don't forget to change region to *ap-southeast-1*
+4. To destroy infrastructore, type command below
+```
+terraform destroy -input=false -auto-approve
+```
 ### **Provision EC2 with Static IP**
 1. Go to examples folder *ec2_static_ip* 
 ```
@@ -55,4 +59,8 @@ terraform plan
 ```
 terraform apply -input=false -auto-approve
 ```
-3. Check in your AWS Console GUI, don't forget to change region to *ap-southeast-1*
+6. Check in your AWS Console GUI, don't forget to change region to *ap-southeast-1*
+7. To destroy infrastructore, type command below
+```
+terraform destroy -input=false -auto-approve
+```
