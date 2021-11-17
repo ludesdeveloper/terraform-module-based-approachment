@@ -1,3 +1,5 @@
+variable "sg_vpc_id" {}
+
 variable "ingress_security_groups" {
   description = "Map of ingress security groups"
   type        = map(any)

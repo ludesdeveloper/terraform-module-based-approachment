@@ -3,7 +3,7 @@ resource "aws_security_group" "ingress" {
 
   name        = each.value.description
   description = each.value.description
-  #vpc_id      = aws_vpc.main.id
+  vpc_id      = var.sg_vpc_id
   ingress {
     description = each.value.description
     from_port   = each.value.from_port
@@ -22,7 +22,7 @@ resource "aws_security_group" "egress" {
 
   name        = each.value.description
   description = each.value.description
-  #vpc_id      = aws_vpc.main.id
+  vpc_id      = var.sg_vpc_id
   ingress {
     description = each.value.description
     from_port   = each.value.from_port
