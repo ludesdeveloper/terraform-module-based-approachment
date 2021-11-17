@@ -21,6 +21,6 @@ resource "aws_instance" "instance" {
   private_ip             = var.private_ip
   vpc_security_group_ids = module.security_group.security_group_id
   tags = {
-    Name = "instance"
+    Name = var.instance_name
   }
 }
