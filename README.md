@@ -51,6 +51,7 @@ cd examples/ec2_static_ip
 ```
 cd ../..
 ```
+3. Replace main.tf code in root folder
 4. Preview changes with command below
 ```
 terraform plan
