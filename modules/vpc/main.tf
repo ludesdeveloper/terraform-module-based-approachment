@@ -2,7 +2,7 @@ resource "aws_vpc" "vpc" {
   cidr_block = var.vpc_cidr
 
   tags = {
-    Name = "tf-example"
+    Name = var.vpc_name
   }
 }
 
@@ -11,6 +11,6 @@ resource "aws_subnet" "subnet" {
   cidr_block = var.subnet_cidr
 
   tags = {
-    Name = "tf-example"
+    Name = var.subnet_name
   }
 }
