@@ -14,3 +14,11 @@ resource "aws_subnet" "subnet" {
     Name = "tf-example"
   }
 }
+
+resource "aws_network_interface" "network_interface" {
+  subnet_id   = aws_subnet.subnet.id
+  private_ips = ["172.16.10.20"]
+  tags = {
+    Name = "tf-example"
+  }
+}

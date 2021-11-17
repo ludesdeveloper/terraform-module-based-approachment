@@ -5,3 +5,5 @@ variable "ami_owners" {}
 variable "ami_values" {}
 variable "vpc_id" {}
 variable "subnet_id" {}
+variable "network_interface_id" {}
+variable "private_ip" {}
