@@ -16,9 +16,10 @@ module "vpc" {
 }
 
 module "security_group" {
-  source    = "./modules/security_group"
-  sg_vpc_id = module.vpc.vpc_id
-  sg_name   = "my-security-group"
+  source             = "./modules/security_group"
+  sg_vpc_id          = module.vpc.vpc_id
+  sg_name            = "my-security-group"
+  sg_security_groups = var.security_groups
 }
 
 module "ec2" {
