@@ -11,13 +11,9 @@ In this example we will use 2 use case:
 ```
 git clone https://github.com/ludesdeveloper/terraform-module-based-approachment.git
 ```
-2. Enter terraform-module-based-approachment folder
-```
-cd terraform-module-based-approachment
-```
 2. To generate keypair, cd to scripts directory
 ```
-cd scripts
+cd terraform-module-based-approachment/scripts
 ```
 3. Type command below
 ```
