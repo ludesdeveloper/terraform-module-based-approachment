@@ -23,6 +23,11 @@ cd terraform-module-based-approachment/scripts
 ```
 cd ..
 ```
+### **Initiating Terraform**
+1. Type command below to initiate terraform
+```
+terraform init
+```
 ### **Provision EC2 with Dynamic IP**
 1. Go to root folder then preview changes with command below
 ```
