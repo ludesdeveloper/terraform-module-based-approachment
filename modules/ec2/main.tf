@@ -10,6 +10,7 @@ data "aws_ami" "ami" {
 module "security_group" {
   source    = "./modules/security_group"
   sg_vpc_id = var.vpc_id
+  sg_name   = "my-security-group"
 }
 
 resource "aws_instance" "instance" {

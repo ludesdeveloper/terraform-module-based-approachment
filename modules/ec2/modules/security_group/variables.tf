@@ -1,10 +1,12 @@
 variable "sg_vpc_id" {}
+variable "sg_name" {}
 
-variable "ingress_security_groups" {
+variable "security_groups" {
   description = "Map of ingress security groups"
   type        = map(any)
   default = {
     ssh = {
+      type        = "ingress"
       description = "ssh"
       protocol    = "tcp"
       from_port   = 22
@@ -12,20 +14,15 @@ variable "ingress_security_groups" {
       cidr_blocks = ["0.0.0.0/0"]
     },
     web = {
+      type        = "ingress"
       description = "web"
       protocol    = "tcp"
       from_port   = 80
       to_port     = 80
       cidr_blocks = ["0.0.0.0/0"]
-    }
-  }
-}
-
-variable "egress_security_groups" {
-  description = "Map of egress security groups"
-  type        = map(any)
-  default = {
-    ssh = {
+    },
+    all = {
+      type        = "egress"
       description = "all"
       protocol    = -1
       from_port   = 0
