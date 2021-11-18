@@ -28,7 +28,7 @@ cd ..
 ```
 terraform init
 ```
-### **Provision EC2 with Dynamic IP**
+### **Execute Terraform**
 1. Go to root folder then preview changes with command below
 ```
 terraform plan
@@ -39,29 +39,6 @@ terraform apply -input=false -auto-approve
 ```
 3. Check in your AWS Console GUI, don't forget to change region to *ap-southeast-1*
 4. To destroy infrastructore, type command below
-```
-terraform destroy -input=false -auto-approve
-```
-### **Provision EC2 with Static IP**
-1. Go to examples folder *ec2_static_ip* 
-```
-cd examples/ec2_static_ip
-```
-2. Copy code in main.tf(inside ec2_static_ip folder), then go to root folder
-```
-cd ../..
-```
-3. Replace main.tf code in root folder
-4. Preview changes with command below
-```
-terraform plan
-```
-5. To apply, type command below
-```
-terraform apply -input=false -auto-approve
-```
-6. Check in your AWS Console GUI, don't forget to change region to *ap-southeast-1*
-7. To destroy infrastructore, type command below
 ```
 terraform destroy -input=false -auto-approve
 ```
