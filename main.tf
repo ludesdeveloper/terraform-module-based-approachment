@@ -31,6 +31,6 @@ module "ec2" {
   count_instance        = 1
   instance_type         = "t2.micro"
   subnet_id             = module.vpc.subnet_id
-  ec2_security_group_id = module.security_group.security_group_id
+  ec2_security_group_id = [module.security_group.security_group_id]
   private_ip            = null
 }
