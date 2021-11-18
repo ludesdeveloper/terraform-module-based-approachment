@@ -8,11 +8,12 @@ resource "aws_key_pair" "key_pair" {
 }
 
 module "vpc" {
-  source      = "./modules/vpc"
-  vpc_cidr    = "172.14.0.0/16"
-  vpc_name    = "vpc1"
-  subnet_cidr = ["172.14.10.0/24"]
-  subnet_name = "subnet1"
+  source          = "./modules/vpc"
+  vpc_cidr        = "172.14.0.0/16"
+  vpc_name        = "vpc1"
+  subnet_cidr     = ["172.14.10.0/24"]
+  subnet_name     = "subnet1"
+  route_subnet_id = 0
 }
 
 module "security_group" {
@@ -33,4 +34,9 @@ module "ec2" {
   subnet_id             = module.vpc.subnet_id[0]
   ec2_security_group_id = [module.security_group.security_group_id]
   private_ip            = null
+}
+
+module "eip" {
+  source          = "./modules/eip"
+  eip_instance_id = module.ec2.ec2_instance_id[0]
 }
