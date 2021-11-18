@@ -6,13 +6,23 @@ resource "aws_vpc" "vpc" {
   }
 }
 
-resource "aws_subnet" "subnet" {
-  count      = length(var.subnet_cidr)
+resource "aws_subnet" "private_subnet" {
+  count      = length(var.private_subnet)
   vpc_id     = aws_vpc.vpc.id
-  cidr_block = var.subnet_cidr[count.index]
+  cidr_block = var.private_subnet[count.index]
 
   tags = {
-    Name = var.subnet_cidr[count.index]
+    Name = var.private_subnet[count.index]
+  }
+}
+
+resource "aws_subnet" "public_subnet" {
+  count      = length(var.public_subnet)
+  vpc_id     = aws_vpc.vpc.id
+  cidr_block = var.public_subnet[count.index]
+
+  tags = {
+    Name = var.public_subnet[count.index]
   }
 }
 
@@ -36,7 +46,7 @@ resource "aws_route_table" "route_table" {
 }
 
 resource "aws_route_table_association" "route_assoc" {
+  count          = length(aws_subnet.public_subnet)
   route_table_id = aws_route_table.route_table.id
-  #subnet_id      = aws_subnet.subnet[0].id
-  subnet_id = var.route_subnet_id
+  subnet_id      = aws_subnet.public_subnet[count.index].id
 }

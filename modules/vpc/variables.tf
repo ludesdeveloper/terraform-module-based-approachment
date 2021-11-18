@@ -1,5 +1,5 @@
 variable "vpc_cidr" {}
 variable "vpc_name" {}
-variable "subnet_cidr" {}
+variable "private_subnet" {}
+variable "public_subnet" {}
 variable "subnet_name" {}
-variable "route_subnet_id" {}
