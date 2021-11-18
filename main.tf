@@ -11,7 +11,7 @@ module "vpc" {
   source      = "./modules/vpc"
   vpc_cidr    = "172.14.0.0/16"
   vpc_name    = "vpc1"
-  subnet_cidr = "172.14.10.0/24"
+  subnet_cidr = ["172.14.10.0/24"]
   subnet_name = "subnet1"
 }
 
@@ -30,7 +30,7 @@ module "ec2" {
   ami_values            = "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
   count_instance        = 1
   instance_type         = "t2.micro"
-  subnet_id             = module.vpc.subnet_id
+  subnet_id             = module.vpc.subnet_id[0]
   ec2_security_group_id = [module.security_group.security_group_id]
   private_ip            = null
 }
