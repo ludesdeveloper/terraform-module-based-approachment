@@ -1,8 +1,8 @@
-variable "vpc_cidr" {}
-variable "vpc_name" {}
+variable "cidr" {}
+variable "name" {}
 variable "private_subnet" {}
 variable "public_subnet" {}
 variable "subnet_name" {}
-variable "vpc_availability_zone" {
+variable "availability_zone" {
   default = null
 }

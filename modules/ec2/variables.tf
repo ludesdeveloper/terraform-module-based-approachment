@@ -1,9 +1,9 @@
 variable "key_name" {}
 variable "count_instance" {}
 variable "instance_type" {}
-variable "ami_owners" {}
-variable "ami_values" {}
+variable "ami_owner" {}
+variable "ami_value" {}
 variable "subnet_id" {}
 variable "private_ip" {}
 variable "instance_name" {}
-variable "ec2_security_group_id" {}
+variable "security_group_id" {}

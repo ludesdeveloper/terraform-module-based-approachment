@@ -1,3 +1,3 @@
-variable "sg_vpc_id" {}
-variable "sg_name" {}
-variable "sg_security_groups" {}
+variable "vpc_id" {}
+variable "name" {}
+variable "security_group" {}

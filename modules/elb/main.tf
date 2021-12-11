@@ -18,13 +18,13 @@ resource "aws_elb" "elb" {
     interval            = 30
   }
 
-  instances                   = var.elb_instance_ids
+  instances                   = var.instance_id
   cross_zone_load_balancing   = true
   idle_timeout                = 400
   connection_draining         = true
   connection_draining_timeout = 400
-  subnets                     = var.elb_subnet_ids
-  security_groups             = var.elb_security_groups
+  subnets                     = var.subnet_id
+  security_groups             = var.security_group
 
   tags = {
     Name = "foobar-terraform-elb"

@@ -13,7 +13,7 @@ variable "public_key_file" {
   default = "scripts/ec2-keypair.pub"
 }
 
-variable "security_groups" {
+variable "security_group" {
   description = "Map of ingress security groups"
   type        = map(any)
   default = {

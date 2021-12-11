@@ -1,9 +1,9 @@
 data "aws_ami" "ami" {
-  owners      = var.ami_owners
+  owners      = var.ami_owner
   most_recent = true
   filter {
     name   = "name"
-    values = [var.ami_values]
+    values = [var.ami_value]
   }
 }
 
@@ -14,7 +14,7 @@ resource "aws_instance" "instance" {
   subnet_id              = var.subnet_id
   key_name               = var.key_name
   private_ip             = var.private_ip
-  vpc_security_group_ids = var.ec2_security_group_id
+  vpc_security_group_ids = var.security_group_id
   tags = {
     Name = var.instance_name
   }

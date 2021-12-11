@@ -1,16 +1,16 @@
 resource "aws_security_group" "security_group" {
-  name        = var.sg_name
-  description = var.sg_name
-  vpc_id      = var.sg_vpc_id
+  name        = var.name
+  description = var.name
+  vpc_id      = var.vpc_id
 
 
   tags = {
-    Name = var.sg_name
+    Name = var.name
   }
 }
 
 resource "aws_security_group_rule" "security_group_rule" {
-  for_each          = var.sg_security_groups
+  for_each          = var.security_group
   type              = each.value.type
   from_port         = each.value.from_port
   to_port           = each.value.to_port

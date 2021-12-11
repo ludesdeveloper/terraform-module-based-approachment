@@ -1,3 +1,3 @@
-variable "elb_instance_ids" {}
-variable "elb_subnet_ids" {}
-variable "elb_security_groups" {}
+variable "instance_id" {}
+variable "subnet_id" {}
+variable "security_group" {}

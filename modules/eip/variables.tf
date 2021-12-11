@@ -1,1 +1,1 @@
-variable "eip_instance_id" {}
+variable "instance_id" {}
