@@ -7,20 +7,20 @@ resource "aws_vpc" "vpc" {
 }
 
 resource "aws_subnet" "private_subnet" {
-  count      = length(var.private_subnet)
-  vpc_id     = aws_vpc.vpc.id
-  cidr_block = var.private_subnet[count.index]
-
+  count             = length(var.private_subnet)
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.private_subnet[count.index]
+  availability_zone = var.vpc_availability_zone
   tags = {
     Name = var.private_subnet[count.index]
   }
 }
 
 resource "aws_subnet" "public_subnet" {
-  count      = length(var.public_subnet)
-  vpc_id     = aws_vpc.vpc.id
-  cidr_block = var.public_subnet[count.index]
-
+  count             = length(var.public_subnet)
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.public_subnet[count.index]
+  availability_zone = var.vpc_availability_zone
   tags = {
     Name = var.public_subnet[count.index]
   }
