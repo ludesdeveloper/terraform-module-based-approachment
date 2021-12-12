@@ -6,3 +6,6 @@ variable "subnet_name" {}
 variable "availability_zone" {
   default = null
 }
+variable "nat_gateway_id" {
+  default = null
+}
