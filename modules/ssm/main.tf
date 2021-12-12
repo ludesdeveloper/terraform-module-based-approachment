@@ -20,9 +20,10 @@ resource "aws_iam_instance_profile" "iam_instance_profile" {
   role = aws_iam_role.iam_role.name
 }
 
-resource "aws_iam_policy" "iam_policy" {
+resource "aws_iam_user_policy" "iam_user_policy" {
+  count  = length(var.user_name)
   name   = "SSMUser"
-  path   = "/"
+  user   = var.user_name[count.index]
   policy = file("${path.module}/ssm-user.json")
 }
 
