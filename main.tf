@@ -41,7 +41,7 @@ module "vpc_subnet" {
   public_subnet       = ["172.14.30.0/24"]
   internet_gateway_id = module.vpc_internet_gateway.internet_gateway_id
   nat_gateway_id      = module.vpc_nat_gateway.nat_gateway_id
-  availability_zone   = "ap-southeast-1a"
+  # availability_zone   = "ap-southeast-1a"
 }
 
 module "security_group" {
@@ -56,7 +56,7 @@ module "ec2_private" {
   instance_name     = "instance_private"
   key_name          = aws_key_pair.key_pair.key_name
   ami_owner         = ["099720109477"]
-  ami_value         = "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
+  ami_value         = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
   count_instance    = 1
   instance_type     = "t2.micro"
   subnet_id         = module.vpc_subnet.private_subnet_id[0]
@@ -64,12 +64,25 @@ module "ec2_private" {
   private_ip        = "172.14.20.10"
 }
 
+module "ec2_private_2" {
+  source            = "./modules/ec2"
+  instance_name     = "instance_private"
+  key_name          = aws_key_pair.key_pair.key_name
+  ami_owner         = ["099720109477"]
+  ami_value         = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
+  count_instance    = 1
+  instance_type     = "t2.micro"
+  subnet_id         = module.vpc_subnet.private_subnet_id[0]
+  security_group_id = [module.security_group.security_group_id]
+  private_ip        = "172.14.20.11"
+}
+
 module "ec2_public" {
   source         = "./modules/ec2"
   instance_name  = "instance_public"
   key_name       = aws_key_pair.key_pair.key_name
   ami_owner      = ["099720109477"]
-  ami_value      = "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
+  ami_value      = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
   count_instance = 1
   instance_type  = "t2.micro"
   # subnet_id         = module.vpc.public_subnet_id[0]
@@ -90,5 +103,9 @@ module "eip_association" {
 
 module "rds" {
   source       = "./modules/rds"
-  subnet_group = module.vpc_subnet.private_subnet_id[1]
+  subnet_group = module.vpc_subnet.private_subnet_id
+}
+
+output "subnet-test" {
+  value = module.vpc_subnet.private_subnet_id
 }
