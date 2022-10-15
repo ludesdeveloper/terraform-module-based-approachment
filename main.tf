@@ -19,13 +19,24 @@ module "vpc_internet_gateway" {
   name   = "cloud-internet-gateway"
 }
 
+module "vpc_nat_gateway" {
+  source           = "./modules/vpc_nat_gateway"
+  internet_gateway = module.vpc_internet_gateway.internet_gateway
+  name             = "cloud-nat-gateway"
+  subnet_id        = module.vpc_subnet.private_subnet_id[0]
+  eip_id           = module.eip.eip_id
+}
+
 module "vpc_subnet" {
-  source              = "./modules/vpc_subnet"
-  vpc_id              = module.vpc.vpc_id
-  name                = "cloud-subnet"
-  public_subnet       = ["192.168.1.0/24"]
-  private_subnet      = ["192.168.2.0/24"]
+  source = "./modules/vpc_subnet"
+  vpc_id = module.vpc.vpc_id
+  name   = "cloud-subnet"
+  # public_subnet       = ["192.168.1.0/24"]
+  # private_subnet      = ["192.168.2.0/24"]
+  private_subnet      = ["172.14.20.0/24"]
+  public_subnet       = ["172.14.30.0/24"]
   internet_gateway_id = module.vpc_internet_gateway.internet_gateway_id
+  nat_gateway_id      = module.vpc_nat_gateway.nat_gateway_id
 }
 
 module "security_group" {
