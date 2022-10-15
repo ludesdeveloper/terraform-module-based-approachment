@@ -1,4 +1,5 @@
 # **TERRAFORM MODULE BASED APPROACHMENT**
+> Note : for some reason I cannot create ip 192.168.1, so, i use 172.14
 ### **Requirement**
 1. Terraform installed (**Tested on Terraform v1.2.8**)
 2. AWS Cli installed and configured with existing account
