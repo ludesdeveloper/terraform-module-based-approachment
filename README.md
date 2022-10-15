@@ -1,6 +1,6 @@
 # **TERRAFORM MODULE BASED APPROACHMENT**
 ### **Requirement**
-1. Terraform installed
+1. Terraform installed (**Tested on Terraform v1.2.8**)
 2. AWS Cli installed and configured with existing account
 ### **How to Use It**
 1. Clone respository
