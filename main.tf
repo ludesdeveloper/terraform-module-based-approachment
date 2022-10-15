@@ -53,7 +53,7 @@ module "security_group" {
 
 module "ec2_private" {
   source            = "./modules/ec2"
-  instance_name     = "instance_private"
+  instance_name     = "backend_a"
   key_name          = aws_key_pair.key_pair.key_name
   ami_owner         = ["099720109477"]
   ami_value         = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
@@ -66,7 +66,7 @@ module "ec2_private" {
 
 module "ec2_private_2" {
   source            = "./modules/ec2"
-  instance_name     = "instance_private"
+  instance_name     = "backend_b"
   key_name          = aws_key_pair.key_pair.key_name
   ami_owner         = ["099720109477"]
   ami_value         = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
@@ -79,7 +79,7 @@ module "ec2_private_2" {
 
 module "ec2_public" {
   source         = "./modules/ec2"
-  instance_name  = "instance_public"
+  instance_name  = "bastion"
   key_name       = aws_key_pair.key_pair.key_name
   ami_owner      = ["099720109477"]
   ami_value      = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
