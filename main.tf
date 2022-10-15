@@ -86,3 +86,7 @@ module "eip_association" {
   eip_id      = module.eip.eip_id
   instance_id = module.ec2_public.instance_id[0]
 }
+
+module "rds" {
+  source = "./modules/rds"
+}
