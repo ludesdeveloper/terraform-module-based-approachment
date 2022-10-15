@@ -37,10 +37,11 @@ module "vpc_subnet" {
   name   = "cloud-subnet"
   # public_subnet       = ["192.168.1.0/24"]
   # private_subnet      = ["192.168.2.0/24"]
-  private_subnet      = ["172.14.20.0/24"]
+  private_subnet      = ["172.14.20.0/24", "172.14.40.0/24"]
   public_subnet       = ["172.14.30.0/24"]
   internet_gateway_id = module.vpc_internet_gateway.internet_gateway_id
   nat_gateway_id      = module.vpc_nat_gateway.nat_gateway_id
+  availability_zone   = "ap-southeast-1a"
 }
 
 module "security_group" {
@@ -88,5 +89,6 @@ module "eip_association" {
 }
 
 module "rds" {
-  source = "./modules/rds"
+  source       = "./modules/rds"
+  subnet_group = module.vpc_subnet.private_subnet_id[1]
 }
