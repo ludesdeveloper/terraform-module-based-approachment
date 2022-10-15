@@ -19,12 +19,16 @@ module "vpc_internet_gateway" {
   name   = "cloud-internet-gateway"
 }
 
+module "eip_nat" {
+  source = "./modules/eip"
+}
+
 module "vpc_nat_gateway" {
   source           = "./modules/vpc_nat_gateway"
   internet_gateway = module.vpc_internet_gateway.internet_gateway
   name             = "cloud-nat-gateway"
   subnet_id        = module.vpc_subnet.private_subnet_id[0]
-  eip_id           = module.eip.eip_id
+  eip_id           = module.eip_nat.eip_id
 }
 
 module "vpc_subnet" {
@@ -75,4 +79,10 @@ module "ec2_public" {
 
 module "eip" {
   source = "./modules/eip"
+}
+
+module "eip_association" {
+  source      = "./modules/eip_association"
+  eip_id      = module.eip.eip_id
+  instance_id = module.ec2_public.instance_id[0]
 }
