@@ -105,7 +105,3 @@ module "rds" {
   source       = "./modules/rds"
   subnet_group = module.vpc_subnet.private_subnet_id
 }
-
-output "subnet-test" {
-  value = module.vpc_subnet.private_subnet_id
-}
