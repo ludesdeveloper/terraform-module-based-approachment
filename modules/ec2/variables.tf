@@ -1,5 +1,5 @@
 variable "key_name" {}
-variable "count_instance" {}
+# variable "count_instance" {}
 variable "instance_type" {}
 variable "ami_owner" {}
 variable "ami_value" {}
