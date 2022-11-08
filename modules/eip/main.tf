@@ -1,3 +1,4 @@
 resource "aws_eip" "eip" {
-  vpc = true
+  count = length(var.eip_count)
+  vpc   = true
 }
