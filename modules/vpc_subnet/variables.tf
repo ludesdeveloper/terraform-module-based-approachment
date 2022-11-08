@@ -1,7 +1,11 @@
 variable "vpc_id" {}
 variable "name" {}
-variable "private_subnet" {}
-variable "public_subnet" {}
+variable "private_subnet" {
+  default = []
+}
+variable "public_subnet" {
+  default = []
+}
 # variable "subnet_name" {}
 variable "availability_zone" {
   default = null
