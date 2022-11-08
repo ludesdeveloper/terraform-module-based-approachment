@@ -20,7 +20,8 @@ module "vpc_internet_gateway" {
 }
 
 module "eip_nat" {
-  source = "./modules/eip"
+  eip_count = ["nothing"]
+  source    = "./modules/eip"
 }
 
 module "vpc_nat_gateway" {
@@ -28,7 +29,7 @@ module "vpc_nat_gateway" {
   internet_gateway = module.vpc_internet_gateway.internet_gateway
   name             = "cloud-nat-gateway"
   subnet_id        = module.vpc_subnet.private_subnet_id[0]
-  eip_id           = module.eip_nat.eip_id
+  eip_id           = module.eip_nat.eip_id[0]
 }
 
 module "vpc_subnet" {
@@ -53,52 +54,51 @@ module "security_group" {
 
 module "ec2_private" {
   source            = "./modules/ec2"
-  instance_name     = "backend_a"
+  instance_name     = ["backend_a"]
   key_name          = aws_key_pair.key_pair.key_name
   ami_owner         = ["099720109477"]
   ami_value         = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
-  count_instance    = 1
   instance_type     = "t2.micro"
   subnet_id         = module.vpc_subnet.private_subnet_id[0]
   security_group_id = [module.security_group.security_group_id]
-  private_ip        = "172.14.20.10"
+  private_ip        = ["172.14.20.10"]
 }
 
 module "ec2_private_2" {
   source            = "./modules/ec2"
-  instance_name     = "backend_b"
+  instance_name     = ["backend_b"]
   key_name          = aws_key_pair.key_pair.key_name
   ami_owner         = ["099720109477"]
   ami_value         = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
-  count_instance    = 1
   instance_type     = "t2.micro"
   subnet_id         = module.vpc_subnet.private_subnet_id[0]
   security_group_id = [module.security_group.security_group_id]
-  private_ip        = "172.14.20.11"
+  private_ip        = ["172.14.20.11"]
 }
 
 module "ec2_public" {
-  source         = "./modules/ec2"
-  instance_name  = "bastion"
-  key_name       = aws_key_pair.key_pair.key_name
-  ami_owner      = ["099720109477"]
-  ami_value      = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
-  count_instance = 1
-  instance_type  = "t2.micro"
+  source        = "./modules/ec2"
+  instance_name = ["bastion"]
+  key_name      = aws_key_pair.key_pair.key_name
+  ami_owner     = ["099720109477"]
+  ami_value     = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
+  instance_type = "t2.micro"
   # subnet_id         = module.vpc.public_subnet_id[0]
   subnet_id         = module.vpc_subnet.public_subnet_id[0]
   security_group_id = [module.security_group.security_group_id]
-  private_ip        = null
+  private_ip        = [null]
 }
 
 module "eip" {
-  source = "./modules/eip"
+  eip_count = module.ec2_public.instance_id
+  source    = "./modules/eip"
 }
 
 module "eip_association" {
-  source      = "./modules/eip_association"
-  eip_id      = module.eip.eip_id
-  instance_id = module.ec2_public.instance_id[0]
+  eip_association_count = module.ec2_public.instance_id
+  source                = "./modules/eip_association"
+  eip_id                = module.eip.eip_id
+  instance_id           = module.ec2_public.instance_id
 }
 
 module "rds" {
