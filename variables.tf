@@ -41,6 +41,14 @@ variable "security_group" {
       to_port     = 443
       cidr_blocks = ["0.0.0.0/0"]
     },
+    kubernetes = {
+      type        = "ingress"
+      description = "kubernetes"
+      protocol    = "tcp"
+      from_port   = 6443
+      to_port     = 6443
+      cidr_blocks = ["0.0.0.0/0"]
+    },
     all = {
       type        = "egress"
       description = "all"
